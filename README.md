@@ -5,5 +5,4 @@ A very basic Godot addon that adds the VS Code "Collapse Folder" button to the F
 ![Example image](example.png)
 
 ----
-
-Icon from https://github.com/vscode-icons/vscode-icons
+Icon by [vscode-icons](https://github.com/vscode-icons/vscode-icons) licensed under the [Creative Commons - ShareAlike (CC BY-SA)](https://creativecommons.org/licenses/by-sa/4.0/) license.
