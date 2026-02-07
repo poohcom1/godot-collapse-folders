@@ -7,6 +7,8 @@ var buttons: Array[Button] = []
 func _enter_tree():
 	var fs_dock := EditorInterface.get_file_system_dock()
 	filesystem_tree = find_filesystem_tree(fs_dock)
+	if filesystem_tree == null:
+		print_rich("[color=#ff786b][Godot Collapse Folder] Error: Cannot find filesystem tree. Please report this issue to [url]https://github.com/poohcom1/godot-collapse-folders/issues[/url].")
 	var fs_button_containers := find_button_container(fs_dock)
 
 	for container in fs_button_containers:
@@ -40,7 +42,7 @@ func collapse_files():
 # Util functions
 func find_filesystem_tree(node: Node) -> Tree:
 	for child in node.get_children():
-		if child is Tree and node is SplitContainer:
+		if child is Tree and node is MarginContainer and node.get_parent() is SplitContainer:
 			return child
 		var ret := find_filesystem_tree(child)
 		if ret:
