@@ -42,13 +42,23 @@ func collapse_files():
 # Util functions
 func find_filesystem_tree(node: Node) -> Tree:
 	for child in node.get_children():
-		if child is Tree and node is MarginContainer and node.get_parent() is SplitContainer:
+		if _is_file_tree(child, node):
 			return child
 		var ret := find_filesystem_tree(child)
 		if ret:
 			return ret
 	return null
 
+func _is_file_tree(child: Node, parent: Node) -> bool:
+	var ver = Engine.get_version_info()
+	# Unoptimized as FUCK but easier to read and only runs at start so eh
+	if ver.major == 4:
+		if ver.minor <= 5:
+			return child is Tree and parent is SplitContainer
+		else:
+			return child is Tree and parent is MarginContainer and parent.get_parent() is SplitContainer
+	else:
+		return false
 
 func find_button_container(node: Node) -> Array[Container]:
 	var containers: Array[Container] = []
